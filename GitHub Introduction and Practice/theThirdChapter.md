@@ -120,3 +120,33 @@ $ git commit -m "Add hello world script by php"
  1 file changed, 3 insertions(+)
  create mode 100644 hello_world.php
 ```
+
+&emsp;&emsp;通过 git add命令将文件加入暂存区，再通过 git commit命令提交。添加成功后，可以通过 git log命令查看提交日志。
+
+```shell
+git log
+commit d23b909caad5d49a281480e6683ce3855087a5da
+Author: hirocastest <hohtsuka@gmail.com>
+Date:   Tue May 1 14:36:58 2012 +0900
+        　
+    Add hello world script by php
+```
+
+##### 进行 push
+
+之后只要执行 push，GitHub 上的仓库就会被更新。
+
+```shell
+git push
+Counting objects: 4, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 328 bytes, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To git@github.com:hirocastest/Hello-World.git
+   46ff713..d23b909 master -> master
+```
+
+## 3.3　小结
+
+&emsp;&emsp;本章讲解了初次在 GitHub 建立仓库以及公开代码的流程。完成这些，就踏入了 GitHub 的世界。
