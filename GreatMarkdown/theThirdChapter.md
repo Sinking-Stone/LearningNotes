@@ -62,16 +62,16 @@
 
 &emsp;&emsp;菜单栏→【格式】→【加粗/斜体/代码（行内代码）/图像/超链接】可以添加或移除关于文字样式 的标记符号。如果没有选中文字，则只会添加标记符号；如果选中了文字，则会为选中的文字添加或移除标记符号。
 
-|操作|macOS系统|Windows系统|
-|:--:|:--:|:--:|
-|粗体|Command + B|Ctrl + B|
-|斜体|Command + I|Ctrl + I|
-|行内代码|Command + `|    |
-|图片|Contril + Command + B|Ctrl + Shift + I|
-|超链接|Command + K|Ctrl + K|
-|链接引用|Contril + Shift + `|    |
-|删除线|Contril + Shift + ~|Alt + Shift + 5|
-|表情符号|Contril + Command + 空格键|      |
+|   操作   |         macOS系统          |   Windows系统    |
+| :------: | :------------------------: | :--------------: |
+|   粗体   |        Command + B         |     Ctrl + B     |
+|   斜体   |        Command + I         |     Ctrl + I     |
+| 行内代码 |        Command + `         |                  |
+|   图片   |   Contril + Command + B    | Ctrl + Shift + I |
+|  超链接  |        Command + K         |     Ctrl + K     |
+| 链接引用 |    Contril + Shift + `     |                  |
+|  删除线  |    Contril + Shift + ~     | Alt + Shift + 5  |
+| 表情符号 | Contril + Command + 空格键 |                  |
 
 **小提示：** 如果想使用自动补全表情符号的功能，需要到【偏好设置】中去激活：【偏好设置】→【编辑器】→【触发自动完成】→勾选【Emoji表情】，然后在输入Emoji标记语法时，Typora会自动给出补全信息。
 
@@ -91,42 +91,42 @@
 
 对标题进行设置的快捷键:
 
-|操作|macOS系统|Windows系统|
-|:--:|:--:|:--:|
-|设为一级标题|Command + 1|Ctrl + 1|
-|设为一级标题|Command + 2|Ctrl + 2|
-|设为一级标题|Command + 3|Ctrl + 3|
-|设为一级标题|Command + 4|Ctrl + 4|
-|设为一级标题|Command + 5|Ctrl + 5|
-|提升标题级别|Command + =|Ctrl + =|
-|降低标题级别|Command + -|Ctrl + -|
-|设为普通文本|Command + 0|Ctrl + 0|
+|     操作     |  macOS系统  | Windows系统 |
+| :----------: | :---------: | :---------: |
+| 设为一级标题 | Command + 1 |  Ctrl + 1   |
+| 设为一级标题 | Command + 2 |  Ctrl + 2   |
+| 设为一级标题 | Command + 3 |  Ctrl + 3   |
+| 设为一级标题 | Command + 4 |  Ctrl + 4   |
+| 设为一级标题 | Command + 5 |  Ctrl + 5   |
+| 提升标题级别 | Command + = |  Ctrl + =   |
+| 降低标题级别 | Command + - |  Ctrl + -   |
+| 设为普通文本 | Command + 0 |  Ctrl + 0   |
 
 ##### c. 列表
 
 &emsp;&emsp;Typora支持有序列表、无序列表和任务列表，它们之间可以通过快捷键实现快速切换，还可以使用列表缩进功能快速调整缩进，使用起来非常方便。
 
-|操作|macOS系统|Windows系统|
-|:--:|:--:|:--:|
-|添加有序列表|Option + Command + O|Ctrl + Shift + [|
-|添加无序列表|Option + Command + U|Ctrl + Shift + ]|
-|  增加缩进  |Command + ]|Ctrl + ]|
-|  减少缩进  |Command + [|Ctrl + [|
-|添加任务列表|Option + Command + X||
-|切换任务状态|Contril + X||
+|     操作     |      macOS系统       |   Windows系统    |
+| :----------: | :------------------: | :--------------: |
+| 添加有序列表 | Option + Command + O | Ctrl + Shift + [ |
+| 添加无序列表 | Option + Command + U | Ctrl + Shift + ] |
+|   增加缩进   |     Command + ]      |     Ctrl + ]     |
+|   减少缩进   |     Command + [      |     Ctrl + [     |
+| 添加任务列表 | Option + Command + X |                  |
+| 切换任务状态 |     Contril + X      |                  |
 
 ##### d. 引用和水平分隔线
 
-|操作|macOS系统|Windows系统|
-|:--:|:--:|:--:|
-|添加引用|Option + Command + Q|Ctrl + Shift + Q|
-|添加水平分割线|Shift + Command + -||
+|      操作      |      macOS系统       |   Windows系统    |
+| :------------: | :------------------: | :--------------: |
+|    添加引用    | Option + Command + Q | Ctrl + Shift + Q |
+| 添加水平分割线 | Shift + Command + -  |                  |
 
 ##### e. 表格
 
-|macOS系统|Windows系统|
-|:--:|:--:|
-|Option + Command + T|Ctrl + T|
+|      macOS系统       | Windows系统 |
+| :------------------: | :---------: |
+| Option + Command + T |  Ctrl + T   |
 
 &emsp;&emsp;还有一种可以快速创建表格的比较酷的方式：输入表头的标记语法，在最后一个 | 之后按回车键
 
@@ -134,10 +134,10 @@
 
 &emsp;&emsp;可以在表格中单击鼠标右键，选择【表格】，通过其列出的操作选项对表格进行操作
 
-|操作|macOS系统|Windows系统|
-|:--:|:--:|:--:|
-|增加一行（下一行）|Command + Enter||
-|删除一行（当前行）|Shift + Command + Delete||
+|        操作        |        macOS系统         | Windows系统 |
+| :----------------: | :----------------------: | :---------: |
+| 增加一行（下一行） |     Command + Enter      |             |
+| 删除一行（当前行） | Shift + Command + Delete |             |
 
 + 快速调整表格
 
@@ -150,9 +150,9 @@
 
 &emsp;&emsp;如果想添加或删除围栏代码块的标记，可以执行：菜单栏→【段落】→【代码块】。如果想把某段内容使用围栏代码块包裹，需要先选中该内容，然后执行上述操作。
 
-|macOS系统|Windows系统|
-|:--:|:--:|
-|Option + Command + C|Ctrl + Shift + K|
+|      macOS系统       |   Windows系统    |
+| :------------------: | :--------------: |
+| Option + Command + C | Ctrl + Shift + K |
 
 + 显示代码行数
 
@@ -176,9 +176,9 @@
 
 <u>这个文字下面有下滑线</u>
 
-|macOS系统|Windows系统|
-|:--:|:--:|
-|Command + U|Ctrl + U|
+|  macOS系统  | Windows系统 |
+| :---------: | :---------: |
+| Command + U |  Ctrl + U   |
 
 ##### b. 内联数学公式
 
@@ -243,9 +243,9 @@
 
 为什么==乌鸦==像==写字台==
 
-|macOS系统|Windows系统|
-|:--:|:--:|
-|Command + Shift + H||
+|      macOS系统      | Windows系统 |
+| :-----------------: | :---------: |
+| Command + Shift + H |             |
 
 ##### e. 注释
 
@@ -255,17 +255,17 @@
 <!-- 我是注释 -->
 ```
 
-|macOS系统|Windows系统|
-|:--:|:--:|
-|Contril +  -||
+|  macOS系统   | Windows系统 |
+| :----------: | :---------: |
+| Contril +  - |             |
 
 ##### f. 清除样式
 
 如果想快速清除样式，可以执行：菜单栏→【格式】→【清除样式】
 
-|macOS系统|Windows系统|
-|:--:|:--:|
-|Command + \ |Ctrl + \|
+|  macOS系统  | Windows系统 |
+| :---------: | :---------: |
+| Command + \ |  Ctrl + \   |
 
 #### 2. 编辑段落
 
@@ -279,9 +279,9 @@ $$
 $$
 ```
 
-|macOS系统|Windows系统|
-|:--:|:--:|
-|Option + Command + B|Ctrl + Shift + M|
+|      macOS系统       |   Windows系统    |
+| :------------------: | :--------------: |
+| Option + Command + B | Ctrl + Shift + M |
 
 ##### b. 目录
 
@@ -310,9 +310,9 @@ $$
 我们可以这样引用一个脚注[^参考]  
 [^参考]：这段文字是对脚注的描述
 
-|macOS系统|Windows系统|
-|:--:|:--:|
-|Option + Command + R||
+|      macOS系统       | Windows系统 |
+| :------------------: | :---------: |
+| Option + Command + R |             |
 
 ##### d. 图表（序列图、流程图和Mermaid）
 
@@ -515,11 +515,11 @@ section 项目测试
 
 &emsp;&emsp;执行：菜单栏→【文件】→【快速打开】，此时会打开一个弹窗，弹窗会列出最近打开过的文件列表，并且可以通过文件名进行查找，这样就能不离开窗口而快速打开文件了。
 
-|操作|macOS系统|Windows系统|
-|:--:|:--:|:--:|
-|打开文件|Command + O|Ctrl + O|
-|打开最近一个关闭的文件|Shift + Command + T|Ctrl + Shift + T|
-|快速打开最近打开过的文件|Shift + Command + O|Ctrl + P|
+|           操作           |      macOS系统      |   Windows系统    |
+| :----------------------: | :-----------------: | :--------------: |
+|         打开文件         |     Command + O     |     Ctrl + O     |
+|  打开最近一个关闭的文件  | Shift + Command + T | Ctrl + Shift + T |
+| 快速打开最近打开过的文件 | Shift + Command + O |     Ctrl + P     |
 
 #### 2. 复原历史版本
 
@@ -547,45 +547,45 @@ section 项目测试
 
 &emsp;&emsp;在默认情况下，在Typora中复制文本时，复制的是渲染后的格式。如果想复制Markdown源码，可以执行：菜单栏→【编辑】→【复制为Markdown】，或者选择要复制内容，单击鼠标右键，在弹出的菜单中选择【复制为Markdown】。
 
-|macOS系统|Windows系统|
-|:--:|:--:|
-|Command + Shift + C |Ctrl + Shift + C|
+|      macOS系统      |   Windows系统    |
+| :-----------------: | :--------------: |
+| Command + Shift + C | Ctrl + Shift + C |
 
 &emsp;&emsp;如果我们想把“复制Markdown源码”设置为默认的复制行为，可以执行：文件→【偏好设置】→【默认复制行为】→勾选【当复制纯文件时复制Markdown源码】。
 &emsp;&emsp;如果想直接复制HTML源码，可以执行：菜单栏→【编辑】→【复制为HTML代码】；如果想在粘贴时去掉所有格式，可以执行：菜单栏→【编辑】→【粘贴为纯文本】。
 
-|macOS系统|Windows系统|
-|:--:|:--:|
-|Command + Shift + V |Ctrl + Shift + V|
+|      macOS系统      |   Windows系统    |
+| :-----------------: | :--------------: |
+| Command + Shift + V | Ctrl + Shift + V |
 
 #### 2. 选择
 
 &emsp;&emsp;【编辑】菜单中的选择功能有选中当前词、选中当前行/句、选中当前格式文本和全选。
 
-|操作|macOS系统|Windows系统|
-|:--:|:--:|:--:|
-|   选中当前词   |Command + D|Ctrl + D|
-|  选中当前行/句 |Command + L|Ctrl + Shift + L|
-|选中当前格式文本|Command + E|Ctrl + E|
-|全选|Command + A|Ctrl + A|
+|       操作       |  macOS系统  |   Windows系统    |
+| :--------------: | :---------: | :--------------: |
+|    选中当前词    | Command + D |     Ctrl + D     |
+|  选中当前行/句   | Command + L | Ctrl + Shift + L |
+| 选中当前格式文本 | Command + E |     Ctrl + E     |
+|       全选       | Command + A |     Ctrl + A     |
 
 #### 3. 删除
 
 &emsp;&emsp;由于选择操作（选中当前词、选中当前行/句、选中当前格式文本和全选）都有快捷键，因此在Typora中，删除内容最便捷的方法就是先选择再删除，仅需两步。
 
-|macOS系统|Windows系统|
-|:--:|:--:|
-|Command + Shift + D |Ctrl + Shift + D|
+|      macOS系统      |   Windows系统    |
+| :-----------------: | :--------------: |
+| Command + Shift + D | Ctrl + Shift + D |
 
 #### 4. 查找和替换
 
 &emsp;&emsp;通过快捷键Command+F（Windows：Ctrl+F）调出查找面板，在查找面板上可以设置是否“区分大小写”和是否“查找整个单词”，默认都是否。
 &emsp;&emsp;可以在查找面板上切换上一个和下一个查找结果，也可以按回车键切换下一个，或者通过快捷键切换。
 
-|操作|macOS系统|Windows系统|
-|:--:|:--:|:--:|
-|查找上一个|Command + G|F3|
-|查找下一个|Command + Shift + G|Shift + F3|
+|    操作    |      macOS系统      | Windows系统 |
+| :--------: | :-----------------: | :---------: |
+| 查找上一个 |     Command + G     |     F3      |
+| 查找下一个 | Command + Shift + G | Shift + F3  |
 
 &emsp;&emsp;单击查找面板上【查找】右边的向下三角，或者通过快捷键Option+Command+F（Windows：Ctrl+H）可以显示查找和替换面板
 &emsp;&emsp;如果把光标放在替换内容输入框中，按回车键会替换下一个，也可以通过快捷键（macOS系统:Command+Option+E）来替换下一个。
@@ -594,11 +594,11 @@ section 项目测试
 
 &emsp;&emsp;除通过侧边栏的大纲列表进行跳转外，还可以通过快捷键快速跳转到页首、页尾和选中的文本区域。
 
-|操作|macOS系统|Windows系统|
-|:--:|:--:|:--:|
-|跳转到文首|Command + ↑|Ctrl + Home|
-|跳转到文末|Command + ↓|Ctrl + End|
-|跳转到所选内容|Command + J|Ctrl + J|
+|      操作      |  macOS系统  | Windows系统 |
+| :------------: | :---------: | :---------: |
+|   跳转到文首   | Command + ↑ | Ctrl + Home |
+|   跳转到文末   | Command + ↓ | Ctrl + End  |
+| 跳转到所选内容 | Command + J |  Ctrl + J   |
 
 #### 6. 图片操作
 
@@ -670,11 +670,11 @@ section 项目测试
 2. 专注模式：只高亮显示光标所在行，其余内容全部变灰。
 3. 全屏：最大化文件窗口，排除其他软件的干扰。
 
-|操作|macOS系统|Windows系统|
-|:--:|:--:|:--:|
-|全屏|Command + Control + F|F11|
-|打字机模式|F9|F9|
-|专注模式|F8|F8|
+|    操作    |       macOS系统       | Windows系统 |
+| :--------: | :-------------------: | :---------: |
+|    全屏    | Command + Control + F |     F11     |
+| 打字机模式 |          F9           |     F9      |
+|  专注模式  |          F8           |     F8      |
 
 ## 3.4 本章小结
 
