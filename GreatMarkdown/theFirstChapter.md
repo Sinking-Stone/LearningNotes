@@ -77,7 +77,6 @@
 |熊掌记|简化并兼容标准语法|×（macOS）|√（iOS）|√（内购）|☆☆☆☆☆|文艺青年|
 |Ulysses|Markdown XL|×（macOS）|√（iOS）|×|☆☆☆☆|重度文字工作者|
 |MWeb|GFM|×（macOS）|√（iOS）|×|☆☆☆☆|技术写作人员|
-|Ulysses|Markdown XL|×（macOS）|√（iOS）|×|☆☆☆☆|重度文字工作者|
 |MarkdownPad|GFM|×（Windows）|×|√（内购）|☆☆☆|Window用户|
 |CMD Markdown|GFM|√|×|√（内购）|☆☆☆☆|所有人|
 
