@@ -16,7 +16,7 @@
 &emsp;&emsp;运行下面的命令创建 SSH Key ：
 
 ```shell
-ssh-keygen -t rsa -C "your_email@example.com"
+$ ssh-keygen -t rsa -C "your_email@example.com"
 Generating public/private rsa key pair.
 Enter file in which to save the key
 (/Users/your_user_directory/.ssh/id_rsa): 按回车键
@@ -40,7 +40,7 @@ cat ~/.ssh/id_rsa.pub
 &emsp;&emsp;完成以上设置后，就可以用手中的私人密钥与 GitHub 进行认证和通信了。
 
 ```shell
-ssh -T git@github.com
+$ ssh -T git@github.com
 The authenticity of host 'github.com (207.97.227.239)' can't be established.
 RSA key fingerprint is fingerprint值 .
 Are you sure you want to continue connecting (yes/no)? 输入yes
@@ -75,13 +75,13 @@ Hi hirocastest! You've successfully authenticated, but GitHub does not provide s
 ##### clone 已有仓库
 
 ```shell
-git clone git@github.com:hirocastest/Hello-World.git
+$ git clone git@github.com:hirocastest/Hello-World.git
 Cloning into 'Hello-World'...
 remote: Counting objects: 3, done.
 remote: Total 3 (delta 0), reused 0 (delta 0)
 Receiving objects: 100% (3/3), done.
 
-cd Hello-World
+$ cd Hello-World
 ```
 
 &emsp;&emsp;这里会要求输入 GitHub 上设置的公开密钥的密码。认证成功后，仓库便会被 clone 至仓库名后的目录中。将想要公开的代码提交至这个仓库再 push 到 GitHub 的仓库中，代码便会被公开。
@@ -100,7 +100,7 @@ hello_world.php的内容
 &emsp;&emsp;由于 hello_word.php 还没有添加至 Git 仓库，所以显示为 Untracked files。
 
 ```shell
-git status
+$ git status
 # On branch master
 # Untracked files:
 #   (use "git add <file>..." to include in what will be committed)
@@ -124,7 +124,7 @@ $ git commit -m "Add hello world script by php"
 &emsp;&emsp;通过 git add命令将文件加入暂存区，再通过 git commit命令提交。添加成功后，可以通过 git log命令查看提交日志。
 
 ```shell
-git log
+$ git log
 commit d23b909caad5d49a281480e6683ce3855087a5da
 Author: hirocastest <hohtsuka@gmail.com>
 Date:   Tue May 1 14:36:58 2012 +0900
@@ -137,7 +137,7 @@ Date:   Tue May 1 14:36:58 2012 +0900
 之后只要执行 push，GitHub 上的仓库就会被更新。
 
 ```shell
-git push
+$ git push
 Counting objects: 4, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (2/2), done.
