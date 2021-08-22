@@ -360,9 +360,9 @@ Note right of 李四: 我显示在李四的右边
 
 + 语法格式
 
-```flow
-flowchart语法
-```
+        ```flow
+        flowchart语法
+        ```
 
 + 语法说明
 
@@ -406,13 +406,13 @@ cond(no)->op
         ```
 + 实例演示
 
-    ```mermaid
-    %% 序列图举例（注释）
-    sequenceDiagram
-    张三->>李四: 李四，吃了吗
-    李四-->>张三:好久不见，刚吃了
-    Note right of 李四: 我显示在李四的右边
-    ```
+        ```mermaid
+        %% 序列图举例（注释）
+        sequenceDiagram
+        张三->>李四: 李四，吃了吗
+        李四-->>张三:好久不见，刚吃了
+        Note right of 李四: 我显示在李四的右边
+        ```
 
 ```mermaid
 %% 序列图举例（注释）
@@ -426,11 +426,19 @@ Note right of 李四: 我显示在李四的右边
 
 + 语法格式
 
-```mermaid
-Mermaid流程图
-```
+        ```mermaid
+        Mermaid流程图
+        ```
 
 + 实例演示
+
+        ```mermaid
+        graph TD
+        A[开始] --> B(你爱我吗)
+        B --> C{Yes or No?}
+        C --> |Yes| D[结束]
+        C --> |No| B
+        ```
 
 ```mermaid
 graph TD
@@ -443,11 +451,25 @@ C --> |No| B
 &emsp;&emsp;3）Mermaid甘特图。甘特图（Gantt chart）是将活动与时间联系起来的一种图表形式，能够显示每个活动的历时长短。甘特图很清晰地标识出每一项任务的起始与结束时间，通常在项目管理中使用，方便人们从时间上整体把握项目进度。
 &emsp;&emsp;Mermaid甘特图的语法如下（可参考http://knsv.github.io/mermaid/index.html#mermaid-cli）
 
-```mermaid
-Mermaid甘特图
-```
+    ```mermaid
+    Mermaid甘特图
+    ```
 
 + 实例演示
+
+        ```mermaid
+        gantt
+        dateFormat YYYY-MM-DD
+        title 项目开发周期
+        section 需求评审
+        需求评审: 2021-01-01,2021-05-02
+        section 功能开发
+        开发代码: 2021-01-03,2021-02-02
+        开发自测: 2021-02-02,2021-03-02
+        section 项目测试
+        第一轮测试: 2021-03-02,2021-04-02
+        第二轮测试: 2021-04-02,2021-05-02
+        ```
 
 ```mermaid
 gantt
@@ -491,6 +513,8 @@ section 项目测试
 + 示例代码
 
 ```md
+
+<iframe height='256' scrolling='yes' title='百度首页' src='https://www.baidu.com' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%'></iframe>
 ```
 
 <iframe height='256' scrolling='yes' title='百度首页' src='https://www.baidu.com' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%'></iframe>
@@ -501,7 +525,7 @@ section 项目测试
 
 + 示例代码
 
-<vide0 src="文件路径">
+        <vide0 src="文件路径">
 
 **注意：** 内嵌的视频在导出文件时是无法显示的。
 
@@ -680,4 +704,4 @@ section 项目测试
 
 &emsp;&emsp;本章主要介绍了目前最流行的Markdown编辑器——Typora，它支持所见即所得，支持GFM和一些常用的扩展语法，并且为几乎每一种语法都提供了快捷的操作方式。它支持导入和导出各种常见的文件格式，在文件操作、编辑和显示方面也极为出色。  
 &emsp;&emsp;Typora基本上能够满足我们的日常写作需求，但它无法在手机端使用，也不支持云同步。如果你觉得这些非常重要，可以使用Bear。Bear支持在Mac、iPhone和iPad上使用Markdown，也支持多端同步。  
-&emsp;&emsp;开源软件MarkText有着跟Typora类似的用户体验，但功能相对简单一些
+&emsp;&emsp;开源软件MarkText有着跟Typora类似的用户体验，但功能相对简单一些。
