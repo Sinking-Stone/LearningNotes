@@ -19,7 +19,7 @@
 ### 3.1.1 快速开始
 
 1. 下载安装
-    下载地址：https://typora.io/#download。
+    下载地址：<https://typora.io/#download>。
 
 2. 设置语言
     【偏好设置】→【通用】→【语言】，选择语言后，重启Typora即可生效。
@@ -336,7 +336,7 @@ $$
 + 语法说明
 
 1. 使用3个`+sequence包裹js-sequence-diagrams语法。
-2. js-sequence-diagrams语法参考https://bramp.github.io/js-sequence-diagrams/。
+2. js-sequence-diagrams语法参考<https://bramp.github.io/js-sequence-diagrams/>。
 
         ```sequence
         张三 -> 李四: 李四，吃了吗
@@ -367,7 +367,7 @@ Note right of 李四: 我显示在李四的右边
 + 语法说明
 
 1. 使用3个`+flow包裹flowchart.js语法。
-2. flowchart.js语法参考http://flowchart.js.org/。
+2. flowchart.js语法参考<http://flowchart.js.org/>。
 
 + 实例演示
 
@@ -397,7 +397,7 @@ cond(no)->op
 
 &emsp;&emsp;Typora集成了Mermaid，Mermaid支持使用文本的方式生成图表，包括序列图、流程图和甘特图。
 
-&emsp;&emsp;1）Mermaid序列图的语法如下（可参考https://knsv.github.io/mermaid/#loops32）。
+&emsp;&emsp;1）Mermaid序列图的语法如下（可参考<https://knsv.github.io/mermaid/#loops32>）。
 
 + 语法格式
 
@@ -422,7 +422,7 @@ sequenceDiagram
 Note right of 李四: 我显示在李四的右边
 ```
 
-&emsp;&emsp;2）Mermaid流程图的语法如下（可参考https://knsv.github.io/mermaid/#graph18）。
+&emsp;&emsp;2）Mermaid流程图的语法如下（可参考<https://knsv.github.io/mermaid/#graph18>）。
 
 + 语法格式
 
@@ -449,7 +449,7 @@ C --> |No| B
 ```
 
 &emsp;&emsp;3）Mermaid甘特图。甘特图（Gantt chart）是将活动与时间联系起来的一种图表形式，能够显示每个活动的历时长短。甘特图很清晰地标识出每一项任务的起始与结束时间，通常在项目管理中使用，方便人们从时间上整体把握项目进度。
-&emsp;&emsp;Mermaid甘特图的语法如下（可参考http://knsv.github.io/mermaid/index.html#mermaid-cli）
+&emsp;&emsp;Mermaid甘特图的语法如下（可参考<http://knsv.github.io/mermaid/index.html#mermaid-cli>）
 
     ```mermaid
     Mermaid甘特图
