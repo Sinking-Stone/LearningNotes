@@ -504,7 +504,7 @@ gitbook install
 &emsp;&emsp;很多页面的目录插件都需要我们手动插入，如ATOC就需要手动在每一个页面添加`<!--toc-->`，这确实比较麻烦。
 &emsp;&emsp;使用page-treeview可以解决这个问题，它会为每一个页面自动生成目录树。唯一的缺点是插件作者的版权声明会很突兀地显示在目录树下面，不过不影响使用。
 
-➊ GitHub地址为https：//github.com/aleen42/gitbook-treeview。
+➊ GitHub地址为<https://github.com/aleen42/gitbook-treeview>。
 
 ➋ 配置方式如下。
 

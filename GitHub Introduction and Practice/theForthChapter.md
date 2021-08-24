@@ -206,30 +206,156 @@ B-->C(fix-B)
 
 &emsp;&emsp;不同分支中，可以同时进行完全不同的作业。等该分支的作业完成之后再与 master 分支合并。通过灵活运用分支，可以让多人同时高效地进行并行开发。
 
+!["分支作业结束后的状态"](../img/00022.gif "分支作业结束后的状态")
+
+### git branch——显示分支一览表
+
+&emsp;&emsp;git branch命令可以将分支名列表显示，同时可以确认当前所在分支。
+
+```shell
+$ git branch
+* master
+```
+
+&emsp;&emsp;可以看到 master 分支左侧标有“*”（星号），表示这是我们当前所在的分支。也就是说，我们正在 master 分支下进行开发。结果中没有显示其他分支名，表示本地仓库中只存在 master 一个分支。
+
+### git checkout -b——创建、切换分支
+
+&emsp;&emsp;如果想以当前的 master 分支为基础创建新的分支，我们需要用到 `git checkout -b`命令。
+
+#### 切换到 feature-A 分支并进行提交
+
+&emsp;&emsp;执行下面的命令，创建名为 feature-A 的分支。
+
+```shell
+$ git checkout -b feature-A
+Switched to a new branch 'feature-A'
+```
+
+&emsp;&emsp;连续执行下面两条命令也能收到同样效果。
+
+```shell
+git branch feature-A
+git checkout feature-A
+```
+
+&emsp;&emsp;创建 feature-A 分支，并将当前分支切换为 feature-A 分支。这时再来查看分支列表，会显示我们处于 feature-A 分支下。
+
+```shell
+$ git branch
+* feature-A
+  master
+```
+
+&emsp;&emsp;feature-A 分支左侧标有“*”，表示当前分支为 feature-A。在这个状态下像正常开发那样修改代码、执行 git add 命令并进行提交的话，代码就会提交至 feature-A 分支。像这样不断对一个分支（例如 feature-A）进行提交的操作，我们称为“培育分支”。
+
+&emsp;&emsp;我们在README.md中添加了 feature-A 这样一行字母，然后进行提交。
+
+```shell
+$ git add README.md
+$ git commit -m "Add feature-A"
+[feature-A 8a6c8b9] Add feature-A
+ 1 file changed, 2 insertions(+)
+```
+
+&emsp;&emsp;于是，这一行就添加到 feature-A 分支中了。
+
+#### 切换到 master 分支
+
+&emsp;&emsp;现在我们再来看一看 master 分支有没有受到影响。首先切换至 master 分支。
+
+```shell
+$ git checkout master
+Switched to branch 'master'
+```
+
+&emsp;&emsp;然后查看 README . md 文件，会发现 README . md 文件仍然保持原先的状态，并没有被添加文字。feature-A 分支的更改不会影响到 master 分支，这正是在开发中创建分支的优点。只要创建多个分支，就可以在不互相影响的情况下同时进行多个功能的开发。
+
+#### 切换回上一个分支
+
+&emsp;&emsp;现在，我们再切换回 feature-A 分支。
+
+```shell
+$ git checkout -
+Switched to branch 'feature-A'
+```
+
+&emsp;&emsp;像上面这样用“-”（连字符）代替分支名，就可以切换至上一个分支。当然，将“-”替换成 feature-A 同样可以切换到 feature-A 分支。
+
+### 特性分支
+
+&emsp;&emsp;Git 与 Subversion（SVN）等集中型版本管理系统不同，创建分支时不需要连接中央仓库，所以能够相对轻松地创建分支。因此，当今大部分工作流程中都用到了特性（Topic）分支。
+
+&emsp;&emsp;特性分支顾名思义，是集中实现单一特性（主题），除此之外不进行任何作业的分支。在日常开发中，往往会创建数个特性分支，同时在此之外再保留一个随时可以发布软件的稳定分支。稳定分支的角色通常由 master 分支担当。
+
 ```mermaid
 graph TD
 
-A((PPre)) --> B((Pre))
-B --> D[Pref-A]
-D --> E(feature-A)
-E --> F(master)
-B --> F(master)
-B --> C(fix-B)
+A((Pre-m)) --> C((master))
+A --> B((ftre-A))
+B --> C((master))
 ```
 
+&emsp;&emsp;之前我们创建了 feature-A 分支，这一分支主要实现 feature-A，除 feature-A 的实现之外不进行任何作业。即便在开发过程中发现了 BUG，也需要再创建新的分支，在新分支中进行修正。
+&emsp;&emsp;基于特定主题的作业在特性分支中进行，主题完成后再与 master 分支合并。只要保持这样一个开发流程，就能保证 master 分支可以随时供人查看。这样一来，其他开发者也可以放心大胆地从 master 分支创建新的特性分支。
 
+### 主干分支
 
+&emsp;&emsp;主干分支是刚才讲解的特性分支的原点，同时也是合并的终点。通常人们会用 master 分支作为主干分支。主干分支中并没有开发到一半的代码，可以随时供他人查看。
+&emsp;&emsp;有时我们需要让这个主干分支总是配置在正式环境中，有时又需要用标签 Tag 等创建版本信息，同时管理多个版本发布。拥有多个版本发布时，主干分支也有多个。
 
+#### git merge——合并分支
 
+&emsp;&emsp;接下来，假设 feature-A 已经实现完毕，想要将它合并到主干分支 master 中。首先切换到 master 分支。
 
+```shell
+$ git checkout master
+Switched to branch 'master'
+```
 
+&emsp;&emsp;然后合并 feature-A 分支。为了在历史记录中明确记录下本次分支合并，我们需要创建合并提交。因此，在合并时加上 `--no-ff`参数。
 
+```shell
+git merge --no-ff feature-A
+```
 
+&emsp;&emsp;随后编辑器会启动，用于录入合并提交的信息。
 
+```shell
+Merge branch 'feature-A'
+    　
+# Please enter a commit message to explain why this merge is necessary,
+# especially if it merges an updated upstream into a topic branch.
+#
+# Lines starting with '#' will be ignored, and an empty message aborts
+# the commit.
+```
 
+&emsp;&emsp;默认信息中已经包含了是从 feature-A 分支合并过来的相关内容，所以可不必做任何更改。将编辑器中显示的内容保存，关闭编辑器，然后就会看到下面的结果。
 
+```shell
+Merge made by the 'recursive' strategy.
+ README.md | 2 ++
+ 1 file changed, 2 insertions(+)
+```
 
+&emsp;&emsp;这样一来，feature-A 分支的内容就合并到 master 分支中了。
 
+#### git log --graph——以图表形式查看分支
+
+&emsp;&emsp;用 `git log --graph` 命令进行查看的话，能很清楚地看到特性分支（feature-A）提交的内容已被合并。除此以外，特性分支的创建以及合并也都清楚明了。`git log --graph` 命令可以用图表形式输出提交日志，非常直观。
+
+## 4.3　更改提交的操作
+
+### git reset——回溯历史版本
+
+&emsp;&emsp;Git 的另一特征便是可以灵活操作历史版本。借助分散仓库的优势，可以在不影响其他仓库的前提下对历史版本进行操作。我们先回溯历史版本，创建一个名为 fix-B 的特性分支。
+
+!["回溯历史，创建 fix-B 分支"](../img/00024.gif "回溯历史，创建 fix-B 分支")
+
+#### 回溯到创建 feature-A 分支前
+
+要让仓库的 HEAD、暂存区、当前工作树回溯到指定状态，需要用到 git reset --hard命令。只要提供目标时间点的哈希值 1，就可以完全恢复至该时间点的状态。
 
 
 
