@@ -355,13 +355,484 @@ Merge made by the 'recursive' strategy.
 
 #### 回溯到创建 feature-A 分支前
 
-要让仓库的 HEAD、暂存区、当前工作树回溯到指定状态，需要用到 git reset --hard命令。只要提供目标时间点的哈希值 1，就可以完全恢复至该时间点的状态。
+要让仓库的 HEAD、暂存区、当前工作树回溯到指定状态，需要用到 git reset --hard命令。只要提供目标时间点的哈希值 ，就可以完全恢复至该时间点的状态。
 
+> 哈希值在每个环境中各不相同，读者请查看自身当前环境中 Add index 的哈希值，进行替换。
 
+```shell
+$ git reset --hard fd0cbf0d4a25f747230694d95cac1be72d33441d
+HEAD is now at fd0cbf0 Add index
+```
 
+&emsp;&emsp;我们已经成功回溯到特性分支（feature-A）创建之前的状态。由于所有文件都回溯到了指定哈希值对应的时间点上，README . md 文件的内容也恢复到了当时的状态。
 
+#### 创建 fix-B 分支
 
++ 创建特性分支（fix-B）
 
+```shell
+$ git checkout -b fix-B
+Switched to a new branch 'fix-B'
+```
 
++ 作为这个主题的作业内容
 
+```md
+# Git教程
+        　
+  - fix-B
+```
 
++ 然后直接提交 README . md 文件
+
+```shell
+$ git add README.md
+        　
+$ git commit -m "Fix B"
+[fix-B 4096d9e] Fix B
+ 1 file changed, 2 insertions(+)
+```
+
++ 现在的状态如图所示
+
+```mermaid
+graph TD
+
+A(("p-master")) --> B((master))
+B --> C((fix-B))
+```
+
+#### 推进至 feature-A 分支合并后的状态
+
+&emsp;&emsp;首先恢复到 feature-A 分支合并后的状态。这一操作为 “ 推进历史 ” 。`git log` 命令只能查看以当前状态为终点的历史日志。所以这里要使用 `git reflog` 命令，查看当前仓库的操作日志。在日志中找出回溯历史之前的哈希值，通过 `git reset --hard` 命令恢复到回溯历史前的状态。
+
++ 首先执行 `git reflog` 命令，查看当前仓库执行过的操作的日志
+
+```shell
+$ git reflog
+4096d9e HEAD@{0}: commit: Fix B
+fd0cbf0 HEAD@{1}: checkout: moving from master to fix-B
+fd0cbf0 HEAD@{2}: reset: moving to fd0cbf0d4a25f747230694d95cac1be72d33441d
+83b0b94 HEAD@{3}: merge feature-A: Merge made by the 'recursive' strategy.
+fd0cbf0 HEAD@{4}: checkout: moving from feature-A to master
+8a6c8b9 HEAD@{5}: checkout: moving from master to feature-A
+fd0cbf0 HEAD@{6}: checkout: moving from feature-A to master
+8a6c8b9 HEAD@{7}: commit: Add feature-A
+fd0cbf0 HEAD@{8}: checkout: moving from master to feature-A
+fd0cbf0 HEAD@{9}: commit: Add index
+9f129ba HEAD@{10}: commit (initial): First commit
+```
+
+&emsp;&emsp;在日志中，我们可以看到 `commit`、`checkout`、`reset`、`merge` 等 Git 命令的执行记录。只要不进行 Git 的 GC（Garbage Collection，垃圾回收），就可以通过日志随意调取近期的历史状态，就像给时间机器指定一个时间点，在过去未来中自由穿梭一般。即便开发者错误执行了 Git 操作，基本也都可以利用 `git reflog` 命令恢复到原先的状态，所以请务必牢记本部分。
+&emsp;&emsp;从上面数第四行表示 feature-A 特性分支合并后的状态，对应哈希值为 83b0b94。我们将 HEAD、暂存区、工作树恢复到这个时间点的状态。
+
+> 哈希值只要输入 4 位以上就可以执行。
+
+```shell
+$ git checkout master
+        　
+$ git reset --hard 83b0b94
+HEAD is now at 83b0b94 Merge branch 'feature-A'
+```
+
+&emsp;&emsp;之前我们使用 `git reset --hard` 命令回溯了历史，这里又再次通过它恢复到了回溯前的历史状态。
+
+!["恢复历史后的状态"](../img/00027.gif "恢复历史后的状态")
+
+#### 消除冲突
+
+&emsp;&emsp;现在只要合并 fix-B 分支，就可以得到我们想要的状态。
+
+```shell
+$ git merge --no-ff fix-B
+Auto-merging README.md
+CONFLICT (content): Merge conflict in README.md
+Recorded preimage for 'README.md'
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+&emsp;&emsp;这时，系统告诉我们 README . md 文件发生了冲突（Conflict）。系统在合并 README . md 文件时，feature-A 分支更改的部分与本次想要合并的 fix-B 分支更改的部分发生了冲突。不解决冲突就无法完成合并，所以我们打开 README . md 文件，解决这个冲突。
+
+#### 查看冲突部分并将其解决
+
++ 用编辑器打开 README.md 文件，查看
+
+```md
+# Git教程
+        　
+< < < < < < <  HEAD
+  - feature-A
+=======
+  - fix-B
+> > > > > > >  fix-B
+```
+
+&emsp;&emsp;======= 以上的部分是当前 HEAD 的内容，以下的部分是要合并的 fix-B 分支中的内容。我们在编辑器中将其改成想要的样子。
+
+```md
+# Git教程
+        　
+  - feature-A
+  - fix-B
+```
+
+&emsp;&emsp;本次修正让 feature-A 与 fix-B 的内容并存于文件之中。但是在实际的软件开发中，往往需要删除其中之一，所以在处理冲突时，务必要仔细分析冲突部分的内容后再行修改。
+
+#### 提交解决后的结果
+
++ 冲突解决后，执行 `git add` 命令与 `git commit` 命令
+
+```shell
+$ git add README.md
+        　
+$ git commit -m "Fix conflict"
+Recorded resolution for 'README.md'.
+[master 6a97e48] Fix conflict
+```
+
+&emsp;&emsp;由于本次更改解决了冲突，所以提交信息记为 "Fix conflict"。
+
+### git commit --amend——修改提交信息
+
+&emsp;&emsp;要修改上一条提交信息，可以使用 `git commit --amend`命令。将上一条提交信息记为了 " Fix conflict "，但它其实是 fix-B 分支的合并，解决合并时发生的冲突只是过程之一，这样标记实在不妥。于是，要修改这条提交信息。
+
+```shell
+git commit --amend
+```
+
+执行命令后，编辑器就会启动。
+
+```shell
+Fix conflict
+    　
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD^1 <file>..." to unstage)
+#
+#       modified:   README.md
+#
+```
+
+&emsp;&emsp;编辑器中显示的内容：包含之前的提交信息。请将提交信息的部分修改为 Merge branch 'fix-B'，然后保存文件，关闭编辑器。
+
+```shell
+[master 2e7db6f] Merge branch 'fix-B'
+```
+
+&emsp;&emsp;现在执行 `git log --graph` 命令，可以看到提交日志中的相应内容也已经被修改。
+
+### git rebase -i——压缩历史
+
+&emsp;&emsp;在合并特性分支之前，如果发现已提交的内容中有些许拼写错误等，不妨提交一个修改，然后将这个修改包含到前一个提交之中，压缩成一个历史记录。这是个会经常用到的技巧。
+
+#### 创建 feature-C 分支
+
++ 新建一个 feature-C 特性分支
+
+```shell
+$ git checkout -b feature-C
+Switched to a new branch 'feature-C'
+```
+
+&emsp;&emsp;作为 feature-C 的功能实现，在 README . md 文件中添加一行文字，并且故意留下拼写错误，以便之后修正。
+
+```md
+# Git教程
+
+  - feature-A
+  - fix-B
+  - faeture-C
+```
+
+&emsp;&emsp;提交这部分内容。这个小小的变更就没必要先执行 `git add` 命令再执行 `git commit` 命令了，我们用 `git commit -am` 命令来一次完成这两步操作。
+
+```shell
+$ git commit -am "Add feature-C"
+[feature-C 7a34294] Add feature-C
+ 1 file changed, 1 insertion(+)
+```
+
+#### 修正拼写错误
+
++ 修正刚才预留的拼写错误
+
+```shell
+$ git diff
+diff --git a/README.md b/README.md
+index ad19aba..af647fd 100644
+--- a/README.md
++++ b/README.md
+@@ -2,4 +2,4 @@
+        　
+   - feature-A
+   - fix-B
+-  - faeture-C
++  - feature-C
+```
+
++ 然后进行提交
+
+```shell
+$ git commit -am "Fix typo"
+[feature-C 6fba227] Fix typo
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+
+&emsp;&emsp;错字漏字等失误称作 typo，所以我们将提交信息记为 " Fix typo"。实际上，我们不希望在历史记录中看到这类提交，因为健全的历史。如果能在最初提交之前就发现并修正这些错误，也就不会出现这类提交了。
+
+#### 更改历史
+
+&emsp;&emsp;将 " Fix typo " 修正的内容与之前一次的提交合并，在历史记录中合并为一次完美的提交。为此，我们要用到 `git rebase` 命令。
+
+```shell
+git rebase -i HEAD~2
+```
+
+&emsp;&emsp;用上述方式执行 `git rebase` 命令，可以选定当前分支中包含 HEAD（最新提交）在内的两个最新历史记录为对象，并在编辑器中打开。
+
+```shell
+pick 7a34294 Add feature-C
+pick 6fba227 Fix typo
+
+# Rebase 2e7db6f..6fba227 onto 2e7db6f
+#
+# Commands:
+#  p, pick = use commit
+#  r, reword = use commit, but edit the commit message
+#  e, edit = use commit, but stop for amending
+#  s, squash = use commit, but meld into previous commit
+#  f, fixup = like "squash", but discard this commit's log message
+#  x, exec = run command (the rest of the line) using shell
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+# Note that empty commits are commented out
+```
+
+&emsp;&emsp;将 6fba227 的 Fix typo 的历史记录压缩到 7a34294 的 Add feature-C 里。按照下图所示，将 6fba227 左侧的 pick 部分删除，改写为 fixup。
+
+```shell
+pick 7a34294 Add feature-C
+fixup 6fba227 Fix typo
+```
+
+保存编辑器里的内容，关闭编辑器。
+
+```shell
+[detached HEAD 51440c5] Add feature-C
+ 1 file changed, 1 insertion(+)
+Successfully rebased and updated refs/heads/feature-C.
+```
+
+&emsp;&emsp;系统显示 rebase 成功。也就是以下面这两个提交作为对象，将 "Fix typo"的内容合并到了上一个提交 "Add feature-C"中，改写成了一个新的提交。现在再查看提交日志时会发现 Add feature-C 的哈希值已经不是 7a34294 了，这证明提交已经被更改。
+&emsp;&emsp;这样一来，Fix typo 就从历史中被抹去，也就相当于 Add feature-C 中从来没有出现过拼写错误。这算是一种良性的历史改写。
+
+#### 合并至 master 分支
+
+```shell
+$ git checkout master
+Switched to branch 'master'
+        　
+$ git merge --no-ff feature-C
+Merge made by the 'recursive' strategy.
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)
+```
+
+## 4.4　推送至远程仓库
+
+&emsp;&emsp;Git 是分散型版本管理系统，但前面所学习的，都是针对单一本地仓库的操作。下面，将开始接触远在网络另一头的远程仓库。远程仓库顾名思义，是与本地仓库相对独立的另一个仓库。先在 GitHub 上创建一个仓库，并将其设置为本地仓库的远程仓库。
+&emsp;&emsp;参考第 3 章的 3.2 节在 GitHub 上新建一个仓库。为防止与其他仓库混淆，仓库名请与本地仓库保持一致，即 git-tutorial。创建时请不要勾选 Initialize this repository with a README 选项。因为一旦勾选该选项，GitHub 一侧的仓库就会自动生成 README 文件，从创建之初便与本地仓库失去了整合性。虽然到时也可以强制覆盖，但为防止这一情况发生还是建议不要勾选该选项，直接点击 Create repository 创建仓库。
+
+### git remote add——添加远程仓库
+
+&emsp;&emsp;在 GitHub 上创建的仓库路径为“git@github.com:用户名/git-tutorial.git”。现在用 `git remote add`命令将它设置成本地仓库的远程仓库。
+
+> 本节讲解中使用的用户名为 github-book，读者请根据自身环境予以替换。
+
+```shell
+git remote add origin git@github.com:github-book/git-tutorial.git
+```
+
+&emsp;&emsp;按照上述格式执行 `git remote add` 命令之后，Git 会自动将 `git@github.com:github-book/git-tutorial.git`远程仓库的名称设置为 origin（标识符）。
+
+### git push——推送至远程仓库
+
+#### 推送至 master 分支
+
+&emsp;&emsp;如果想将当前分支下本地仓库中的内容推送给远程仓库，需要用到 `git push` 命令。现在假定在 master 分支下进行操作。
+
+```shell
+$ git push -u origin master
+Counting objects: 20, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (10/10), done.
+Writing objects: 100% (20/20), 1.60 KiB, done.
+Total 20 (delta 3), reused 0 (delta 0)
+To git@github.com:github-book/git-tutorial.git
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from origin.
+```
+
+&emsp;&emsp;像这样执行 `git push`命令，当前分支的内容就会被推送给远程仓库 origin 的 master 分支。-u参数可以在推送的同时，将 origin 仓库的 master 分支设置为本地仓库当前分支的 upstream（上游）。添加了这个参数，将来运行 git pull命令从远程仓库获取内容时，本地仓库的这个分支就可以直接从 origin 的 master 分支获取内容，省去了另外添加参数的麻烦。
+&emsp;&emsp;执行该操作后，当前本地仓库 master 分支的内容将会被推送到 GitHub 的远程仓库中。在 GitHub 上也可以确认远程 master 分支的内容和本地 master 分支相同。
+
+#### 推送至 master 以外的分支
+
+&emsp;&emsp;除了 master 分支之外，远程仓库也可以创建其他分支。
+
+```shell
+$ git checkout -b feature-D
+Switched to a new branch 'feature-D'
+```
+
+&emsp;&emsp;在本地仓库中创建了 feature-D 分支，现在将它 push 给远程仓库并保持分支名称不变。
+
+```shell
+$ git push -u origin feature-D
+Total 0 (delta 0), reused 0 (delta 0)
+To git@github.com:github-book/git-tutorial.git
+ * [new branch]      feature-D -> feature-D
+Branch feature-D set up to track remote branch feature-D from origin.
+```
+
+## 4.5　从远程仓库获取
+
+&emsp;&emsp;上一节把在 GitHub 上新建的仓库设置成了远程仓库，并向这个仓库 push 了 feature-D 分支。现在，所有能够访问这个远程仓库的人都可以获取 feature-D 分支并加以修改。
+&emsp;&emsp;本节从实际开发者的角度出发，在另一个目录下新建一个本地仓库，学习从远程仓库获取内容的相关操作。这就相当于刚刚执行过 push 操作的目标仓库又有了另一名新开发者来共同开发。
+
+### git clone——获取远程仓库
+
+#### 获取远程仓库
+
+&emsp;&emsp;首先换到其他目录下，将 GitHub 上的仓库 clone 到本地。注意不要与之前操作的仓库在同一目录下。
+
+```shell
+$ git clone git@github.com:github-book/git-tutorial.git
+Cloning into 'git-tutorial'...
+remote: Counting objects: 20, done.
+remote: Compressing objects: 100% (7/7), done.
+remote: Total 20 (delta 3), reused 20 (delta 3)
+Receiving objects: 100% (20/20), done.
+Resolving deltas: 100% (3/3), done.
+$ cd git-tutorial
+```
+
+&emsp;&emsp;执行 `git clone` 命令后我们会默认处于 master 分支下，同时系统会自动将 origin 设置成该远程仓库的标识符。也就是说，当前本地仓库的 master 分支与 GitHub 端远程仓库（origin）的 master 分支在内容上是完全相同的。
+
+```shell
+$ git branch -a
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/feature-D
+  remotes/origin/master
+```
+
+&emsp;&emsp;用 `git branch -a`命令查看当前分支的相关信息。添加 `-a` 参数可以同时显示本地仓库和远程仓库的分支信息。
+&emsp;&emsp;结果中显示了 `remotes/origin/feature-D`，证明远程仓库中已经有了 feature-D 分支。
+
+#### 获取远程的 feature-D 分支
+
++ 将 feature-D 分支获取至本地仓库
+
+```shell
+$ git checkout -b feature-D origin/feature-D
+Branch feature-D set up to track remote branch feature-D from origin.
+Switched to a new branch 'feature-D'
+```
+
+&emsp;&emsp;`-b` 参数的后面是本地仓库中新建分支的名称。为了便于理解，仍将其命名为 feature-D，让它与远程仓库的对应分支保持同名。新建分支名称后面是获取来源的分支名称。例子中指定了 origin/feature-D，就是说以名为 origin 的仓库（这里指 GitHub 端的仓库）的 feature-D 分支为来源，在本地仓库中创建 feature-D 分支。
+
+#### 向本地的 feature-D 分支提交更改
+
+&emsp;&emsp;现在假定我们是另一名开发者，要做一个新的提交。在 README . md 文件中添加一行文字，查看更改。
+
+```shell
+$ git diff
+diff --git a/README.md b/README.md
+index af647fd..30378c9 100644
+--- a/README.md
++++ b/README.md
+@@ -3,3 +3,4 @@
+   - feature-A
+   - fix-B
+   - feature-C
++  - feature-D
+```
+
+&emsp;&emsp;按照之前学过的方式提交即可。
+
+```shell
+$ git commit -am "Add feature-D"
+[feature-D ed9721e] Add feature-D
+ 1 file changed, 1 insertion(+)
+```
+
+#### 推送 feature-D 分支
+
++ 推送 feature-D 分支
+
+```shell
+$ git push
+Counting objects: 5, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 281 bytes, done.
+Total 3 (delta 1), reused 0 (delta 0)
+To git@github.com:github-book/git-tutorial.git
+   ca0f98b..ed9721e feature-D -> feature-D
+```
+
+&emsp;&emsp;从远程仓库获取 feature-D 分支，在本地仓库中提交更改，再将 feature-D 分支推送回远程仓库，通过这一系列操作，就可以与其他开发者相互合作，共同培育 feature-D 分支，实现某些功能。
+
+### git pull——获取最新的远程仓库分支
+
+&emsp;&emsp;回到原先的那个目录下。这边的本地仓库中只创建了 feature-D 分支，并没有在 feature-D 分支中进行任何提交。然而远程仓库的 feature-D 分支中已经有了刚刚推送的提交。这时我们就可以使用 `git pull` 命令，将本地的 feature-D 分支更新到最新状态。当前分支为 feature-D 分支。
+
+```shell
+$ git pull origin feature-D
+remote: Counting objects: 5, done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 3 (delta 1), reused 3 (delta 1)
+Unpacking objects: 100% (3/3), done.
+From github.com:github-book/git-tutorial
+ * branch            feature-D -> FETCH_HEAD
+ First, rewinding head to replay your work on top of it...
+ Fast-forwarded feature-D to ed9721e686f8c588e55ec6b8071b669f411486b8.
+```
+
+&emsp;&emsp;GitHub 端远程仓库中的 feature-D 分支是最新状态，所以本地仓库中的 feature-D 分支就得到了更新。今后只需要像平常一样在本地进行提交再 push 给远程仓库，就可以与其他开发者同时在同一个分支中进行作业，不断给 feature-D 增加新功能。
+&emsp;&emsp;如果两人同时修改了同一部分的源代码，push 时就很容易发生冲突。所以多名开发者在同一个分支中进行作业时，为减少冲突情况的发生，建议更频繁地进行 push 和 pull 操作。
+
+## 4.6　帮助大家深入理解 Git 的资料
+
+&emsp;&emsp;至此为止，阅读并理解所必需的 Git 操作已经全部讲解完了。但是在实际的开发现场，往往要用到更加高级的 Git 操作。这里介绍一些参考资料，能够帮助各位深入理解 Git 的相关知识。
+
+### Pro Git
+
+&emsp;&emsp;由就职于 GitHub 公司的 Scott Chacon 执笔，是一部零基础的 Git 学习资料。基于知识共享的 CC BY-NC-SA 3.0 许可协议，各位可以免费阅读到包括简体中文在内的各国语言版本。
+
+> Pro Git：<http://git-scm.com/book/zh/v1>  
+> Scott Chacon：<https://github.com/schacon>
+
+### LearnGitBranching
+
+&emsp;&emsp;是学习 Git 基本操作的网站。注重树形结构的学习方式非常适合初学者使用，点击右下角的地球标志还可切换各种语言进行学习。
+
+> LearnGitBranching：<http://pcottle.github.io/learnGitBranching/>
+
+### tryGit
+
+&emsp;&emsp;可以在 Web 上一边操作一边学习 Git 的基本功能。很可惜该教程只有英文版。
+
+> tryGit：<http://try.github.io/>
+
+## 4.7　小结
+
+&emsp;&emsp;本文就理解本书所必需的 Git 操作进行了讲解。只要掌握了本文的知识，就足以应付日常开发中的大部分操作了。遇到不常用的特殊操作时，还请各位读者查阅本书介绍的参考资料，确保操作的正确性。
