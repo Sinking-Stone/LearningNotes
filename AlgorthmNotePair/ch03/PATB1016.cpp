@@ -2,12 +2,18 @@
 using namespace std;
 
 int main() {
-	int n1, n2, hh, mm, ss, temp;
-	if (scanf("%d %d", &n1, &n2)) {};
-	temp = (int)((n2 - n1) / 100.0 + 0.5);
-	hh = temp / 3600;
-	mm = (temp - hh * 3600) / 60;
-	ss = temp % 60;
-	printf("%02d:%02d:%02d", hh, mm, ss);
+	int n1, n2, n3, n4, num1 = 0, num2 = 0;
+	if (scanf("%d %d %d %d", &n1, &n2, &n3, &n4)) {};
+	while (n1) {
+		if (n1 % 10 == n2)
+			num1 = num1 * 10 + n2;
+		n1 /= 10;
+	}
+	while (n3) {
+		if (n3 % 10 == n4)
+			num2 = num2 * 10 + n4;
+		n3 /= 10;
+	}
+	printf("%d", num1 + num2);
 	return 0;
 }
