@@ -1,0 +1,2 @@
+g++ -o t allTest.cpp IOTask_interaction_DDS.cpp serialization_config.cpp serialization_memory.cpp UDSServer.cpp 
+g++ -g allTest.cpp IOTask_interaction_DDS.cpp serialization_config.cpp serialization_memory.cpp UDSServer.cpp 

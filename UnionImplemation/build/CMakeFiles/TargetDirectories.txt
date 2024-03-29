@@ -1,0 +1,3 @@
+/home/aertp/project_ql/bj.w serialize update/lastTest/build/CMakeFiles/a.out.dir
+/home/aertp/project_ql/bj.w serialize update/lastTest/build/CMakeFiles/edit_cache.dir
+/home/aertp/project_ql/bj.w serialize update/lastTest/build/CMakeFiles/rebuild_cache.dir

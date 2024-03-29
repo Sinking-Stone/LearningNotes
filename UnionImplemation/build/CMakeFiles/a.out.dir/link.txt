@@ -1,0 +1,1 @@
+/usr/bin/c++  -g -rdynamic CMakeFiles/a.out.dir/IOTask_interaction_DDS.o CMakeFiles/a.out.dir/UDSServer.o CMakeFiles/a.out.dir/allTest.o CMakeFiles/a.out.dir/serialization_config.o CMakeFiles/a.out.dir/serialization_memory.o CMakeFiles/a.out.dir/test1.o -o a.out 
